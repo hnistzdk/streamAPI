@@ -1,0 +1,35 @@
+package Study.StreamAPI;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * @Description
+ * @Author zdk
+ * @Date 2020/12/28 19:38
+ */
+public class StreamExample {
+    public static void main(String[] args) {
+        List<String> list=new ArrayList<>();
+        list.add("a");list.add("ab");list.add("abc");
+        list.add("a");list.add("abcd");list.add("abcde");
+        //collect 将流中的数据收集到一起进行处理 将 list 转成 set
+        //收集为set时 自动完成了去重 不转为set时也可用distinct方法完成去重
+        Set<String> result= list.stream().collect(Collectors.toSet());
+        System.out.println(result);
+        //filter是筛选过滤掉不满足条件的元素
+        Set<String> result1=list.stream().filter(e->e.length()>2).collect(Collectors.toSet());
+        System.out.println(result1);
+        //map 对流中的数据进行映射（转化），用新的数据替换旧的数据
+        Set<String> result2=list.stream().map(e->e+"我").collect(Collectors.toSet());
+        System.out.println(result2);
+        //利用流转化为map 后面的lambda表达式分别表示map的key和value是如何生成
+//        Map<String, String> map = list.stream().collect(Collectors.toMap(l -> l, o -> o));
+//        System.out.println(map);
+
+        //count 统计流中的元素数量 int result = list.stream().count(); 
+        // forEach 迭代流中的数据 list.stream().forEach(System.out::println); 
+        // max 获取流中的最大元素 int result = list.stream().max(Integer::compareTo).get(); 
+        // min 获取流中的最小元素 int result = list.stream().min(Integer::compareTo).get();
+    }
+}
